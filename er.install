@@ -5,7 +5,7 @@
  * Instance of hook_install.
  */
 function er_install(){
-  
+  variable_set('realname_pattern', '[user:field_er_fname] [user:field_er_lname]');
   // er.module will require er.install.inc, and now we call install_all() in that include file
   install_all();
 
@@ -15,7 +15,7 @@ function er_install(){
  * Instance of hook_uninstall.
  */
 function er_uninstall(){
-
+  variable_del('realname_pattern');
 }
 
 /**
@@ -23,6 +23,7 @@ function er_uninstall(){
  */
 function er_update_7301(){
 // Update User field to supply select list of values.
+  variable_set('realname_pattern', '[user:field_er_fname] [user:field_er_lname]');
   $field = field_info_field('field_er_inst_ref');
   $field['settings']['handler_settings']['behaviors']['views-select-list']['status'] = TRUE;
   field_update_field($field);
