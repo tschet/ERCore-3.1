@@ -101,9 +101,10 @@ function er_form_er_collaborators_node_form_alter(&$form, &$form_state, $form_id
 		),
 	);
 	$form['autofill_collab_submit']['#weight'] = $form[$ref_field]['#weight'] + 0.5;
-	if (isset($form['#group_children'][$ref_field]))
-		$form['#group_children']['autofill_collab_submit'] = $form['#group_children'][$ref_field];
-	
+	if (isset($form['#group_children'][$ref_field])) {
+
+    $form['#group_children']['autofill_collab_submit'] = $form['#group_children'][$ref_field];
+  }
 	if (isset($form_state['attached_user']) && $user = user_load($form_state['attached_user'])){
 		$u = entity_metadata_wrapper('user', $user);
 		//get a reference to the linked collaboration node
@@ -117,7 +118,7 @@ function er_form_er_collaborators_node_form_alter(&$form, &$form_state, $form_id
 		//I haven't figured out how to make this more robust yet...
 		$participating = er_is_user_participating($user->uid, $collab_range);
 		$status = $participating?'Participant':'Collaborator';
-		$form_state['input']['field_er_collab_name']['und'][0]['value'] = $u->field_er_realname->value();
+		$form_state['input']['field_er_collab_name']['und'][0]['value'] = 'bob';
 		
 		// Earlier/original code	
 		//$form_state['input']['field_er_collab_inst_ref']['und'] = array_pop($u->field_er_inst_ref->raw());
@@ -192,10 +193,9 @@ function _set_states_for_inst(&$form, $inst_field_name = 'field_er_inst_ref'){
 }
 
 function autopopulate_collab_submit_callback(&$form, &$form_state){
-	//d('form submitted');
-	//d($form_state, '$form_state');
-	//d($form, '$form submit');
-	if ($uid = $form_state['values'][$form_state['autofill_ref_field']]['und'][0]['target_id'])
+  global $user;
+  $uid = $user->uid;
+  if ($uid == $form_state['values'][$form_state['autofill_ref_field']]['und'][0]['target_id'])
 		$form_state['attached_user'] = $uid;
 	$form_state['rebuild'] = TRUE;
 }
@@ -1105,41 +1105,16 @@ function er_set_default_user_entity_reference_field(&$form, &$form_state, $form_
 	
 	// Autofill the user's name in the Entity Reference field...
 	if (empty($form['field_er_user_entity_reference']['und'][0]['target_id']['#default_value'])){ //only fill it if the field is blank.
-		$form['field_er_user_entity_reference']['und'][0]['target_id']['#default_value'] = get_real_name(true);
-		$form['field_er_user_entity_reference']['und']['#description'] = '<em style="color:red;display:block;">Notice: Your name has been automatically attached.</em>'.$form['field_er_user_entity_reference']['und']['#description'] ;//notify the user that we autofilled your name in.
+    global $user;
+    $person = user_load($user->uid);
+    $form['field_er_user_entity_reference']['und'][0]['target_id']['#default_value'] = $person->name;
+		$form['field_er_user_entity_reference']['und']['#description'] = '<em>Notice: Your name has been automatically attached.</em>'.$form['field_er_user_entity_reference']['und']['#description'] ;//notify the user that we autofilled your name in.
 	}
 }
 
-/**
- * Gets a user's full name (first + last)
- *
- * @author Rusty Keele <rkeele@uen.org>
- * @param bool $add_uid Should the function return the user ID in parenthesis? (example: John Doe (5) )
- * @return string Returns full name, or full name with user ID
- */
-function get_real_name($add_uid = false) {
-	$realname = '';
-	$ent_ref_val = '';
-	global $user;
-	$profile = user_load($user->uid);
-	
-	if( isset($profile->field_er_realname['und']['0']['value']) ) {
-		$realname = (string) $profile->field_er_realname['und']['0']['value'];
-		$ent_ref_val = "$realname ({$profile->uid})";
-	}
-	
-	if($add_uid) {
-		return $ent_ref_val;
-	} else {
-		return $realname;
-	}
-}
-
-function usertest_form_alter(&$form, &$form_state, $form_id) { 
+function usertest_form_alter(&$form, &$form_state, $form_id) {
 	drupal_set_message('THE FORM ID IS:'.$form_id);
  } 
-
-
 
 /**
  * Hide the title field, and generate a generic title.

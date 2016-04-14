@@ -866,7 +866,7 @@ $data = array(
       'entity_types' => array(),
       'settings' => array(
         'target_type' => 'user',
-        'handler' => 'realname',
+        'handler' => 'base',
         'handler_settings' => array(
           'target_bundles' => array(),
           'sort' => array(
@@ -874,7 +874,7 @@ $data = array(
           ),
           'behaviors' => array(
             'views-select-list' => array(
-              'status' => 0,
+              'status' => 1,
             ),
           ),
         ),

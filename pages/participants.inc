@@ -261,7 +261,7 @@ class er_participants extends er_page{
 						foreach ($v as $uid){
 							if ($first) $first = false;
 							else $ret .= ", ";
-							$ret .= $this->er_get_realname($uid);
+							$ret .= 'get name? participants.inc'; 
 							//$ret .= "<li>".l($person['name'], 'user/'.$person['uid'].'/edit')."<br>Committees: ".$person['committees']."</li>";
 						}
 						$ret .= "</li>";
@@ -278,7 +278,7 @@ class er_participants extends er_page{
 				$ret .= "<li>$type:";
 				$ret .= "<ul>";
 				foreach ($v as $user){
-					$ret .= "<li>".$this->er_get_realname($user['uid'])." - ".$user['committee']."</li>";
+					$ret .= "<li>" . "value goes here - ".$user['committee']."</li>";
 					//$ret .= "<li>".l($person['name'], 'user/'.$person['uid'].'/edit')."<br>Committees: ".$person['committees']."</li>";
 				}
 				$ret .= "</ul></li>";

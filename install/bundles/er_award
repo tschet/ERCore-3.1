@@ -183,9 +183,13 @@ $data = array(
       'entity_types' => array(),
       'settings' => array(
         'target_type' => 'user',
-        'handler' => 'realname',
+        'handler' => 'base',
         'handler_settings' => array(
-          'target_bundles' => array(),
+          'view' => array(
+            'view_name' => 'er_user_reference',
+            'display_name' => 'entityreference_1',
+            'args' => array(),
+          ),
           'sort' => array(
             'type' => 'none',
           ),

@@ -692,21 +692,25 @@ $data = array(
       'translatable' => '0',
       'entity_types' => array(),
       'settings' => array(
-        'target_type' => 'user',
-        'handler' => 'realname',
-        'handler_settings' => array(
-          'target_bundles' => array(),
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
+              'target_type' => 'user',
+              'handler' => 'base',
+              'handler_settings' => array(
+                'view' => array(
+                  'view_name' => 'er_user_reference',
+                  'display_name' => 'entityreference_1',
+                  'args' => array(),
+                ),
+                'sort' => array(
+                  'type' => 'none',
+                ),
+                'behaviors' => array(
+                  'views-select-list' => array(
+                    'status' => 0,
+                  ),
+                ),
+              ),
+              'handler_submit' => 'Change handler',
             ),
-          ),
-        ),
-        'handler_submit' => 'Change handler',
-      ),
       'storage' => array(
         'type' => 'field_sql_storage',
         'settings' => array(),

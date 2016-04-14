@@ -60,7 +60,8 @@ class er_user_participating extends er_page{
 		$data[$i]['url'] = '<a href="'.$url.'&ueType='.$defaultType.'&uid='.$data[$i]['uid']. '" rel="lightframe[group|width:800px;height:750px]">Add \''.$defaultType.'\' Event</a>';
 	    
 	    //d($row, 'row');
-		$account = realname_get_user($data[$i]['uid']);
+
+		$account = user_load($data[$i]['uid']);
 		if ($account->name != NULL) {
 			// $data[$i]['name'] = $account->name;
 			$data[$i]['name'] = l($account->name, "user/$account->uid/user-events");

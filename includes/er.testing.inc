@@ -304,15 +304,7 @@ function er_testing() {
 		}		
 	}
 		
-	//Devel
-	if (function_exists('dpm')){
-		$requirements[] = array(
-			'title' => 'Development Tools',
-			'severity' => REQUIREMENT_OK,
-			'value' => '<i class="icon-info-sign"></i> Devel is enabled',
-			'description' => 'This module should be enabled in a development environment, but should not be necessary for a live site.',
-		);
-	}
+
 
 	//d($field_status, '$field_status');
 	$form['reset'] = array(

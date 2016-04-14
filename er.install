@@ -1,7 +1,44 @@
 <?php
+
+
+/**
+ * Instance of hook_install.
+ */
 function er_install(){
   
   // er.module will require er.install.inc, and now we call install_all() in that include file
   install_all();
 
+}
+
+/**
+ * Instance of hook_uninstall.
+ */
+function er_uninstall(){
+
+}
+
+/**
+ * Update entity reference field View fielters.
+ */
+function er_update_7301(){
+// Update User field to supply select list of values.
+  $field = field_info_field('field_er_inst_ref');
+  $field['settings']['handler_settings']['behaviors']['views-select-list']['status'] = TRUE;
+  field_update_field($field);
+
+  $field = field_info_field('field_er_user_entity_reference');
+  if ($field['settings']['handler'] == 'realname') {
+    $field['settings']['handler'] = 'views';
+    $field['settings']['handler_settings']['view']['view_name'] = 'er_user_reference';
+    $field['settings']['handler_settings']['view']['display_name'] = 'entityreference_1';
+    $field['settings']['handler_settings']['view']['args'] = array();
+  };
+  field_update_field($field);
+
+  $field = field_info_field('field_er_user_lookup');
+  if ($field['settings']['handler'] == 'realname') {
+    $field['settings']['handler'] = 'base';
+  }
+  field_update_field($field);
 }

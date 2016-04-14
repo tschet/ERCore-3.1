@@ -3902,72 +3902,7 @@ $data = array(
         ),
       ),
     ),
-    'field_er_realname' => array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'code' => '$fname = field_get_items($entity_type, $entity, \'field_er_fname\');
-$lname = field_get_items($entity_type, $entity, \'field_er_lname\');
-$entity_field[0][\'value\'] = $fname[0][\'value\'] . \' \' . $lname[0][\'value\'];',
-        'display_format' => '$display_output = $entity_field_item[\'value\'];',
-        'store' => 1,
-        'database' => array(
-          'data_type' => 'varchar',
-          'data_length' => '32',
-          'data_size' => 'normal',
-          'data_precision' => '10',
-          'data_scale' => '2',
-          'data_default' => '',
-          'data_not_NULL' => 0,
-          'data_index' => 1,
-        ),
-      ),
-      'storage' => array(
-        'type' => 'field_sql_storage',
-        'settings' => array(),
-        'module' => 'field_sql_storage',
-        'active' => '1',
-        'details' => array(
-          'sql' => array(
-            'FIELD_LOAD_CURRENT' => array(
-              'field_data_field_er_realname' => array(
-                'value' => 'field_er_realname_value',
-              ),
-            ),
-            'FIELD_LOAD_REVISION' => array(
-              'field_revision_field_er_realname' => array(
-                'value' => 'field_er_realname_value',
-              ),
-            ),
-          ),
-        ),
-      ),
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'field_name' => 'field_er_realname',
-      'type' => 'computed',
-      'module' => 'computed_field',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'columns' => array(
-        'value' => array(
-          'type' => 'varchar',
-          'length' => '32',
-          'not null' => 0,
-        ),
-      ),
-      'bundles' => array(
-        'user' => array(
-          0 => 'user',
-        ),
-      ),
-    ),
+
     'field_er_supervisor' => array(
       'type_name' => 'er_user_profile',
       'entity_types' => array(),
@@ -6773,48 +6708,6 @@ White|White',
         'deleted' => '0',
       ),
     ),
-    'field_er_realname' => array(
-      0 => array(
-        'label' => 'Name',
-        'widget' => array(
-          'weight' => '96',
-          'type' => 'computed',
-          'module' => 'computed_field',
-          'active' => 0,
-          'settings' => array(),
-        ),
-        'settings' => array(
-          'user_register_form' => 0,
-          'required_by_role' => array(),
-        ),
-        'display' => array(
-          'default' => array(
-            'label' => 'hidden',
-            'type' => 'hidden',
-            'weight' => '8',
-            'settings' => array(),
-          ),
-          'ical' => array(
-            'type' => 'hidden',
-            'label' => 'above',
-            'settings' => array(),
-            'weight' => 0,
-          ),
-          'full' => array(
-            'label' => 'above',
-            'type' => 'hidden',
-            'weight' => '0',
-            'settings' => array(),
-          ),
-        ),
-        'required' => 0,
-        'description' => '',
-        'field_name' => 'field_er_realname',
-        'entity_type' => 'user',
-        'bundle' => 'user',
-        'deleted' => '0',
-      ),
-    ),
     'field_er_supervisor' => array(
       0 => array(
         'label' => 'Supervisor',
@@ -7640,9 +7533,7 @@ White|White',
       'export_type' => 1,
       'label' => 'Account Information',
       'weight' => '71',
-      'children' => array(
-        0 => 'field_er_realname',
-      ),
+      'children' => array(),
       'format_type' => 'tab',
       'format_settings' => array(
         'formatter' => 'closed',

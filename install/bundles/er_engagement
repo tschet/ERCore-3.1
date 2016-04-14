@@ -560,30 +560,25 @@ $data = array(
       'translatable' => '0',
       'entity_types' => array(),
       'settings' => array(
-        'target_type' => 'node',
-        'handler' => 'base',
-        'handler_submit' => 'Change handler',
-        'handler_settings' => array(
-          'target_bundles' => array(
-            'er_event' => 'er_event',
-          ),
-          'sort' => array(
-            'type' => 'none',
-            'property' => 'nid',
-            'field' => 'body:value',
-            'direction' => 'ASC',
-          ),
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
+              'target_type' => 'user',
+              'handler' => 'base',
+              'handler_settings' => array(
+                'view' => array(
+                  'view_name' => 'er_user_reference',
+                  'display_name' => 'entityreference_1',
+                  'args' => array(),
+                ),
+                'sort' => array(
+                  'type' => 'none',
+                ),
+                'behaviors' => array(
+                  'views-select-list' => array(
+                    'status' => 0,
+                  ),
+                ),
+              ),
+              'handler_submit' => 'Change handler',
             ),
-            'test_field_behavior' => array(
-              'status' => 0,
-              'test_field' => 0,
-            ),
-          ),
-        ),
-      ),
       'storage' => array(
         'type' => 'field_sql_storage',
         'settings' => array(),

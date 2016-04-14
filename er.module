@@ -580,8 +580,10 @@ function er_ctools_plugin_api($module, $api) {
 /**
  * Implements hook_views_api().
  */
-function er_views_api() {
-  return array("version" => "3.0");
+function er_views_api($module, $api) {
+  if ($module == 'views' && $api == 'views_default') {
+    return array('version' => 2);
+  }
 }
 
 //hook_libraries_info()
@@ -617,38 +619,6 @@ function get($obj, $thing, $default=FALSE){
 		default:
 			return $default;
 	}
-}
-
-function er_username_alter(&$name, $account) {
-	// we do not want the email sent out to new users to have the "real name", so we return if we're creating a new acct
-	if (arg(0) == 'admin' && arg(1) == 'people' && arg(2) == 'create')
-		return;
-	
-  if (empty($account->uid)) {
-    // Don't alter anonymous users or objects that do not have any user ID.
-    return;
-  }
-
-  // Real name was loaded/generated via hook_user_load(), so re-use it.
-  if (isset($account->field_er_realname['und'][0]['value'])) {
-    if (drupal_strlen($account->field_er_realname['und'][0]['value'])) {
-      // Only if the real name is a non-empty string is $name actually altered.
-      $name = $account->field_er_realname['und'][0]['value'];
-    }
-    return;
-  }
-}
-
-/*
- * Purpose: to detect any calls to d() "debug" function.
- * 			If the Devel module is installed, the function dsm() is called
- * 			This function ensures we do not receive fatal errors when moving dev code to the live site
- * Category: Troubleshooting
- */ 
-function d($first, $second = ''){
-  global $user;
-  if (function_exists('dpm'))
-	dpm($first, $second);
 }
 
 /*
